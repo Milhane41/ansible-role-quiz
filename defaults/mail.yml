@@ -1,0 +1,5 @@
+---
+quiz_repo: "https://gitlab.com/ftutorials-lab/quiz-ansible.git"
+quiz_dest: "/opt/quiz"
+quiz_port: 3000
+node_major: "23"   # si ton TP impose 23.x

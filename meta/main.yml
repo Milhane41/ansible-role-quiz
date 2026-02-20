@@ -1,0 +1,26 @@
+#SPDX-License-Identifier: MIT-0
+---
+galaxy_info:
+  author: milhane
+  description: Deploy quiz-ansible Node.js application from GitLab
+  company: ""
+
+  license: MIT
+
+  min_ansible_version: 2.14
+
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
+  galaxy_tags:
+    - quiz
+    - nodejs
+    - deployment
+    - web
+
+dependencies: []

@@ -1,0 +1,45 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for ansible-role-quiz
+- name: Install git and curl
+  apt:
+    name:
+      - git
+      - curl
+    update_cache: yes
+    state: present
+
+- name: Add NodeSource repo
+  shell: curl -fsSL https://deb.nodesource.com/setup_{{ node_major }}.x | bash -
+  args:
+    creates: /etc/apt/sources.list.d/nodesource.list
+
+- name: Install nodejs
+  apt:
+    name: nodejs
+    state: present
+
+- name: Clone quiz repo
+  git:
+    repo: "{{ quiz_repo }}"
+    dest: "{{ quiz_dest }}"
+
+- name: Install npm deps
+  command: npm install
+  args:
+    chdir: "{{ quiz_dest }}"
+
+- name: Build app
+  command: npm run build
+  args:
+    chdir: "{{ quiz_dest }}"
+
+- name: Install serve
+  npm:
+    name: serve
+    global: yes
+
+- name: Run app
+  command: serve -s dist -l {{ quiz_port }}
+  args:
+    chdir: "{{ quiz_dest }}"
